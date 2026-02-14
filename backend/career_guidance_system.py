@@ -35,7 +35,7 @@ class CareerGuidanceSystem:
             if os.path.exists(csv_path):
                 try:
                     df = pd.read_csv(csv_path)
-                    print(f"✅ Loaded YOUR {len(df)} records")
+                    print(f"Loaded YOUR {len(df)} records")
                     return self._ensure_features(df)
                 except:
                     pass
@@ -53,7 +53,7 @@ class CareerGuidanceSystem:
         data['career'] = pd.Series(careers).map(self.career_mapping).fillna(0).astype(int)
         df = pd.DataFrame(data)
         df.to_csv('dataset.csv', index=False)
-        print(f"✅ Created 10K dataset")
+        print(f"Created 10K dataset")
         return df
 
     def _ensure_features(self, df):
@@ -91,7 +91,7 @@ class CareerGuidanceSystem:
         train_acc = accuracy_score(y_train, self.model.predict(X_train))
         test_acc = accuracy_score(y_test, self.model.predict(X_test))
 
-        print(f"🚀 Model trained! Train: {train_acc:.1%} | Test: {test_acc:.1%}")
+        print(f"Model trained! Train: {train_acc:.1%} | Test: {test_acc:.1%}")
         self.save_model()
         return test_acc
 
@@ -110,7 +110,7 @@ class CareerGuidanceSystem:
             self.feature_names = data.get('feature_names', self.feature_names)
             self.career_mapping = data.get('career_mapping', self.career_mapping)
             self.reverse_career_mapping = {v: k for k, v in self.career_mapping.items()}
-            print("✅ Model loaded!")
+            print("Model loaded!")
             return True
         return False
 

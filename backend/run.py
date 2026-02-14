@@ -1,12 +1,8 @@
-#!/usr/bin/env python3
-"""
-🚀 AI Career Guidance System - INPUT VALIDATION VERSION
-"""
 from career_guidance_system import CareerGuidanceSystem
 
 
 def validate_numeric_input(prompt, min_val=0, max_val=100, default=50):
-    """✅ Validate numeric input (0-100) with error messages"""
+    """Validate numeric input (0-100) with error messages"""
     while True:
         try:
             value = input(prompt).strip()
@@ -15,18 +11,18 @@ def validate_numeric_input(prompt, min_val=0, max_val=100, default=50):
 
             num_value = float(value)
             if not (min_val <= num_value <= max_val):
-                print(f"❌ ERROR: Value must be between {min_val} and {max_val}")
-                print(f"   Enter a number like: {default}")
+                print(f" ERROR: Value must be between {min_val} and {max_val}")
+                print(f" Enter a number like: {default}")
                 continue
             return num_value
 
         except ValueError:
-            print("❌ ERROR: Please enter a valid NUMBER (e.g., 75, 85.5)")
-            print("   Press Enter for default or type a number 0-100")
+            print(" ERROR: Please enter a valid NUMBER (e.g., 75, 85.5)")
+            print(" Press Enter for default or type a number 0-100")
 
 
 def validate_yes_no_input(prompt, default='n'):
-    """✅ Validate y/n input"""
+    """ Validate y/n input"""
     while True:
         response = input(prompt).strip().lower()
         if response in ['y', 'yes']:
@@ -36,8 +32,8 @@ def validate_yes_no_input(prompt, default='n'):
         elif response == '':
             return default == 'y'
         else:
-            print("❌ ERROR: Please enter 'y' (yes) or 'n' (no)")
-            print("   Press Enter for default")
+            print(" ERROR: Please enter 'y' (yes) or 'n' (no)")
+            print(" Press Enter for default")
 
 
 def get_validated_profile():
@@ -61,7 +57,7 @@ def get_validated_profile():
     profile['spatial_ability'] = 85 if validate_yes_no_input("🏗️ Like design/building? (y/n) [n]: ") else 40
     profile['leadership_score'] = 85 if validate_yes_no_input("👥 Led teams/business? (y/n) [n]: ") else 50
 
-    print("✅ Profile validated successfully!")
+    print("Profile validated successfully!")
     return profile
 
 
@@ -106,7 +102,7 @@ def main():
     except KeyboardInterrupt:
         print("\n👋 Goodbye!")
     except Exception as e:
-        print(f"\n❌ Unexpected error: {e}")
+        print(f"\n Unexpected error: {e}")
         print("💡 Make sure you have: pip install pandas scikit-learn numpy joblib")
 
 
