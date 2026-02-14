@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Colleges{% endblock %}
+{% block content %}
+<div style="padding: 100px 20px 20px; background: #f8fafc;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h1 style="text-align: center; color: #2d3748;">🏫 Colleges</h1>
+        <div style="background: #10b981; color: white; padding: 3rem; border-radius: 20px; text-align: center; margin: 3rem 0;">
+            <h2 style="font-size: 2.5rem;">₹500 per student</h2>
+            <p>Bulk testing for engineering colleges</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <h3 style="color: #10b981;">PV Siddhartha</h3>
+                <p>1,200 students → ₹6 Lakhs</p>
+            </div>
+            <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <h3 style="color: #10b981;">KL University</h3>
+                <p>2,000 students → ₹10 Lakhs</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

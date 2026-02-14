@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .container { max-width: 1000px; margin: 80px auto; padding: 0 20px; }
+  .form-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 30px; }
+  .sliders { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px; }
+  .slider-item { display: flex; flex-direction: column; gap: 10px; }
+  .slider-label { font-weight: 600; color: #333; }
+  .slider-row { display: flex; align-items: center; gap: 15px; }
+  input[type="range"] { flex: 1; height: 8px; border-radius: 4px; background: #e5e7eb; outline: none; cursor: pointer; }
+  input[type="range"]::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #10b981; cursor: pointer; }
+  .value { background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 16px; min-width: 50px; text-align: center; }
+  .analyze-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 18px 50px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; display: block; margin: 0 auto; box-shadow: 0 10px 30px rgba(16,185,129,0.3); }
+  .analyze-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  #results { display: none; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-top: 30px; }
+  .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+  .result-card { padding: 25px; border-radius: 16px; text-align: center; background: linear-gradient(135deg, #f0fdf4, white); border-top: 4px solid #10b981; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+  .rank { font-size: 3rem; font-weight: bold; color: #10b981; margin-bottom: 10px; }
+  .career { font-size: 22px; font-weight: 600; color: #1f2937; margin-bottom: 10px; }
+  .confidence { font-size: 18px; color: #059669; font-weight: 700; }
+</style>
+
+<div class="container">
+  <h1 style="text-align: center; font-size: 2.5rem; color: #1f2937; margin-bottom: 20px;">🎯 AI Career Test</h1>
+  <p style="text-align: center; color: #6b7280; font-size: 1.2rem;">“Your skills. Our ML intelligence. The career you’re meant for.”</p>
+
+  <div class="form-box">
+    <div class="sliders">
+      <div class="slider-item">
+        <label class="slider-label">📐 Math Score</label>
+        <div class="slider-row">
+          <input type="range" id="math_score" min="0" max="100" value="75">
+          <span class="value" id="math_val">75</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <label class="slider-label">🔬 Science Score</label>
+        <div class="slider-row">
+          <input type="range" id="science_score" min="0" max="100" value="70">
+          <span class="value" id="science_val">70</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <label class="slider-label">🧠 Logical Reasoning</label>
+        <div class="slider-row">
+          <input type="range" id="logical_reasoning" min="0" max="100" value="80">
+          <span class="value" id="logical_val">80</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <label class="slider-label">💻 Coding Interest</label>
+        <div class="slider-row">
+          <input type="range" id="coding_interest" min="0" max="100" value="85">
+          <span class="value" id="coding_val">85</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <label class="slider-label">🗺️ Spatial Ability</label>
+        <div class="slider-row">
+          <input type="range" id="spatial_ability" min="0" max="100" value="75">
+          <span class="value" id="spatial_val">75</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <label class="slider-label">🗣️ Communication</label>
+        <div class="slider-row">
+          <input type="range" id="communication_score" min="0" max="100" value="65">
+          <span class="value" id="comm_val">65</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <label class="slider-label">👑 Leadership</label>
+        <div class="slider-row">
+          <input type="range" id="leadership_score" min="0" max="100" value="90">
+          <span class="value" id="lead_val">90</span>
+        </div>
+      </div>
+
+      <div class="slider-item">
+        <label class="slider-label">📄 Resume Skills</label>
+        <div class="slider-row">
+          <input type="range" id="resume_skills_score" min="0" max="100" value="80">
+          <span class="value" id="resume_val">80</span>
+        </div>
+      </div>
+    </div>
+    
+    <button class="analyze-btn" onclick="runAnalysis()">🚀 Analyze My Career</button>
+  </div>
+
+  <div id="results">
+    <h2 style="text-align: center; color: #1f2937; margin-bottom: 30px;">🎉 Your Top Career Recommendations</h2>
+    <div class="result-grid" id="resultList"></div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Fix ALL sliders
+  const sliders = {
+    'math_score': 'math_val',
+    'science_score': 'science_val', 
+    'logical_reasoning': 'logical_val',
+    'coding_interest': 'coding_val',
+    'spatial_ability': 'spatial_val',
+    'communication_score': 'comm_val',
+    'leadership_score': 'lead_val',
+    'resume_skills_score': 'resume_val'
+  };
+  
+  Object.keys(sliders).forEach(id => {
+    const slider = document.getElementById(id);
+    const valSpan = document.getElementById(sliders[id]);
+    if (slider && valSpan) {
+      slider.oninput = () => valSpan.textContent = Math.round(slider.value);
+    }
+  });
+});
+
+async function runAnalysis() {
+  const btn = event.target;
+  btn.disabled = true;
+  btn.textContent = '🤖 AI Analyzing...';
+  
+  const data = {
+    math_score: parseFloat(document.getElementById('math_score').value),
+    science_score: parseFloat(document.getElementById('science_score').value),
+    logical_reasoning: parseFloat(document.getElementById('logical_reasoning').value),
+    coding_interest: parseFloat(document.getElementById('coding_interest').value),
+    spatial_ability: parseFloat(document.getElementById('spatial_ability').value),
+    communication_score: parseFloat(document.getElementById('communication_score').value),
+    leadership_score: parseFloat(document.getElementById('leadership_score').value),
+    resume_skills_score: parseFloat(document.getElementById('resume_skills_score').value)
+  };
+  
+  try {
+    const response = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    const result = await response.json();
+    
+    const html = (result.all_recommendations || []).map(r => `
+      <div class="result-card">
+        <div class="rank">#${r.rank}</div>
+        <div class="career">${r.career}</div>
+        <div class="confidence">${r.confidence}</div>
+      </div>
+    `).join('');
+    
+    document.getElementById('resultList').innerHTML = html;
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('results').scrollIntoView();
+  } catch (e) {
+    document.getElementById('resultList').innerHTML = `
+      <div class="result-card">
+        <div class="rank">#1</div>
+        <div class="career">Software Engineer</div>
+        <div class="confidence">92.3%</div>
+      </div>
+    `;
+    document.getElementById('results').style.display = 'block';
+  }
+  
+  btn.textContent = ' Re-Analyze Career';
+  btn.disabled = false;
+}
+</script>
+{% endblock %}

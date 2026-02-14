@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Pricing - AI Career Pro{% endblock %}
+{% block content %}
+<div style="padding: 80px 20px; background: #f8fafc;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="text-align: center; color: #2d3748; font-size: 3rem; margin-bottom: 3rem;">💰 Choose Your Plan</h1>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+            <div style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center;">
+                <h2 style="color: #10b981; font-size: 1.8rem;">Basic Report</h2>
+                <div style="font-size: 4rem; font-weight: bold; color: #10b981; margin: 1rem 0;">₹99</div>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 1rem 0;">✓ PDF Career Report</li>
+                    <li style="margin: 1rem 0;">✓ Top 3 Careers</li>
+                    <li style="margin: 1rem 0;">✓ Confidence Scores</li>
+                </ul>
+                <a href="#" style="background: #10b981; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600;">Buy Now</a>
+            </div>
+            <div style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; border-top: 5px solid #10b981; transform: scale(1.05);">
+                <h2 style="color: #10b981; font-size: 1.8rem;">Premium</h2>
+                <div style="font-size: 4rem; font-weight: bold; color: #10b981; margin: 1rem 0;">₹499</div>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 1rem 0;">✓ Everything in Basic</li>
+                    <li style="margin: 1rem 0;">✓ Course Recommendations</li>
+                    <li style="margin: 1rem 0;">✓ Skill Gap Analysis</li>
+                    <li style="margin: 1rem 0;">✓ Priority Support</li>
+                </ul>
+                <a href="#" style="background: #10b981; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600;">Get Premium</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
