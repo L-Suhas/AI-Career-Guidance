@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fastapi==0.111.0
 uvicorn==0.29.0
 sentence-transformers==2.7.0
@@ -5,3 +6,11 @@ scikit-learn==1.4.2
 numpy==1.26.4
 pydantic==2.7.1
 python-dotenv==1.0.1
+=======
+Flask==3.0.0
+flask-cors==5.0.0
+pandas==2.2.2
+scikit-learn==1.5.1
+numpy==2.0.1
+joblib==1.4.2
+>>>>>>> f0154e65a34ab1cc1b3ae0ec87ab2062658ffa3a

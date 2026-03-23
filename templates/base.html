@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{% block title %}AI Career Pro{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .navbar { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); padding: 1rem 2rem; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #2d3748; text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { color: #2d3748; text-decoration: none; font-weight: 500; }
+        .nav-menu a:hover { color: #667eea; }
+        main { margin-top: 80px; min-height: calc(100vh - 140px); }
+        .footer { background: #2d3748; color: white; text-align: center; padding: 2rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🎯 AI Career Pro</a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/career-test">Test</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/colleges">Colleges</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2026 AI Career Pro  | 3200+ Students</p>
+        <p>• KL University • PV Siddhartha  </p>
+    </footer>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>
