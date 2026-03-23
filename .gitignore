@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# Node
+node_modules/
+frontend/build/
+
+# Mac
+.DS_Store
+
+# Model cache (large files — don't push)
+backend/.cache/
+~/.cache/huggingface/
+
+# RL data (optional — you can push this)
+# backend/qtable.json

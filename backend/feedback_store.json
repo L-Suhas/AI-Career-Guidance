@@ -1,0 +1,26 @@
+{
+  "Robotics Engineer": {
+    "accept": 2,
+    "reject": 1
+  },
+  "Software Engineer": {
+    "accept": 2,
+    "reject": 1
+  },
+  "Machine Learning Engineer": {
+    "accept": 2,
+    "reject": 1
+  },
+  "Data Scientist": {
+    "accept": 1,
+    "reject": 2
+  },
+  "UI/UX Designer": {
+    "accept": 0,
+    "reject": 2
+  },
+  "Aerospace Engineer": {
+    "accept": 0,
+    "reject": 1
+  }
+}
